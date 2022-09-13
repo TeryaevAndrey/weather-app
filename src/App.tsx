@@ -2,6 +2,8 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import Header from './components/Header/Header';
 import MainContent from './components/MainContent/MainContent';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { getWeatherInfo } from './store/WeatherInfo';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -26,6 +28,13 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const city = useAppSelector((state) => state.weatherInfo.city);
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    dispatch(getWeatherInfo(city));
+  }, [dispatch, city]);
+
   return (
     <div className="App">
       <Header />
