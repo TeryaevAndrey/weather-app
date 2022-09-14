@@ -12,8 +12,13 @@ const CurrentWeather = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  flex-wrap: wrap;
   gap: 30px;
+
+  @media(max-width: 800px) {
+    & {
+      flex-wrap: wrap;
+    }
+  }
 
   @media(max-width: 500px) {
     & {
