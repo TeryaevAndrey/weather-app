@@ -63,9 +63,11 @@ interface InitialState {
 export const getWeatherInfo = createAsyncThunk(
   "WeatherInfo/getWeatherInfo",
   async (city: string, { dispatch }) => {
+    dispatch(setLoading(true));
     const res = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
     );
+    dispatch(setLoading(false));
     dispatch(setWeatherInfo(res.data));
   }
 );
@@ -122,7 +124,7 @@ const initialState: InitialState = {
   },
   city: "Belgorod" || localStorage.getItem("city"),
   searchValue: "",
-  loading: false;
+  loading: false
 };
 
 export const WeatherInfoSlice = createSlice({
@@ -140,8 +142,12 @@ export const WeatherInfoSlice = createSlice({
     setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
     },
+
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    }
   },
 });
 
-export const { setWeatherInfo, setCity, setSearchValue } =
+export const { setWeatherInfo, setCity, setSearchValue, setLoading } =
   WeatherInfoSlice.actions;

@@ -4,17 +4,22 @@ import SunnyImg from "../../../img/sunny.svg";
 import ColdImg from "../../../img/cold.svg";
 import CloudyImg from "../../../img/cloudy.svg";
 import { useAppSelector } from "../../../store/hooks";
+import Loader from "../../Loader/Loader";
 
 const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   max-width: 400px;
   width: 100%;
   min-height: 300px;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
+`;
+
+const Inner = styled.div`
   padding: 20px;
 `;
 
@@ -59,7 +64,8 @@ const City = styled.p`
 
 function MainInfo() {
   const weatherInfo = useAppSelector((state) => state.weatherInfo.weatherInfo);
-  const degrees = Math.round(weatherInfo.main.temp - 273);
+  const loading = useAppSelector((state) => state.weatherInfo.loading);
+  const temp = Math.round(weatherInfo.main.temp - 273);
   const city = weatherInfo.name;
 
   const { timezone, dt }: { timezone: number; dt: number } = weatherInfo;
@@ -79,21 +85,23 @@ function MainInfo() {
     minutes = "0" + minutes;
   }
 
-  let weatherIcon: string;
+  let weatherIcon: string = SunnyImg;
 
-  if(degrees < 0) {
-    weatherIcon = ColdImg;
-  } else if(degrees < 10) {
+  if(temp > 0 && temp < 10) {
     weatherIcon = CloudyImg;
-  } else {
-    weatherIcon = SunnyImg;
+  } 
+  
+  if(temp < 0) {
+    weatherIcon = ColdImg;
   }
 
   return (
     <Wrapper>
+      {loading && <Loader />}
+      <Inner>
       <WrapperMaininfo>
         <DegreesDayWrapper>
-          <Degrees>{degrees}°</Degrees>
+          <Degrees>{temp}°</Degrees>
           <CurrentDay>Сегодня</CurrentDay>
         </DegreesDayWrapper>
         <WeatherImg src={weatherIcon} alt="weather" />
@@ -102,6 +110,7 @@ function MainInfo() {
         Время: {hours}:{minutes}
       </Time>
       <City>Город: {city}</City>
+      </Inner>
     </Wrapper>
   );
 }
