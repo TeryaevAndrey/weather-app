@@ -5,7 +5,10 @@ import MainContent from './components/MainContent/MainContent';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { getWeatherInfo } from './store/WeatherInfo';
 
-const GlobalStyle = createGlobalStyle`
+function App() {
+  const darkTheme = useAppSelector((state) => state.weatherInfo.darkTheme);
+
+  const GlobalStyle = createGlobalStyle`
   * {
     padding: 0;
     margin: 0;
@@ -18,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     line-height: 1;
     color: #000;
+    background-color: ${darkTheme ? "#000" : "fff"};
   }
 
   .App {
@@ -27,7 +31,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function App() {
   const city = useAppSelector((state) => state.weatherInfo.city);
   const dispatch = useAppDispatch();
 

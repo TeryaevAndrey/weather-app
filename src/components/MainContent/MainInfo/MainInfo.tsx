@@ -14,13 +14,18 @@ const Wrapper = styled.div`
   max-width: 400px;
   width: 100%;
   min-height: 300px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme};
   border-radius: 20px;
   box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
+
+  @media(max-width: 450px) {
+    min-height: auto;
+  }
 `;
 
 const Inner = styled.div`
   padding: 20px;
+  color: ${(props) => props.color};
 `;
 
 const WrapperMaininfo = styled.div`
@@ -38,33 +43,55 @@ const Degrees = styled.p`
   font-size: 96px;
   font-weight: 600;
   color: #4793ff;
+
+  @media(max-width: 450px) {
+    font-size: 65px;
+  }
 `;
 
 const CurrentDay = styled.p`
   font-size: 40px;
   margin-top: 5px;
+
+  @media(max-width: 450px) {
+    font-size: 30px;
+  }
 `;
 
 const WeatherImg = styled.img`
   width: 120px;
   height: 120px;
+
+  @media(max-width: 450px) {
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 const Time = styled.p`
   font-size: 25px;
   color: #939cb0;
   margin-top: auto;
+
+  @media(max-width: 450px) {
+    font-size: 20px;
+  }
 `;
 
 const City = styled.p`
   font-size: 25px;
   color: #939cb0;
   margin-top: 10px;
+
+  @media(max-width: 450px) {
+    font-size: 20px;
+  }
 `;
 
 function MainInfo() {
   const weatherInfo = useAppSelector((state) => state.weatherInfo.weatherInfo);
   const loading = useAppSelector((state) => state.weatherInfo.loading);
+  const darkTheme = useAppSelector((state) => state.weatherInfo.darkTheme);
   const temp = Math.round(weatherInfo.main.temp - 273);
   const city = weatherInfo.name;
 
@@ -96,9 +123,9 @@ function MainInfo() {
   }
 
   return (
-    <Wrapper>
+    <Wrapper color={darkTheme ? "#000" : "#fff"}>
       {loading && <Loader />}
-      <Inner>
+      <Inner color={darkTheme ? "#fff !important" : ""}>
       <WrapperMaininfo>
         <DegreesDayWrapper>
           <Degrees>{temp}°</Degrees>

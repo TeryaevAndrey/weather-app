@@ -58,6 +58,7 @@ interface InitialState {
   city: string;
   searchValue: string;
   loading: boolean;
+  darkTheme: boolean;
 }
 
 export const getWeatherInfo = createAsyncThunk(
@@ -124,7 +125,8 @@ const initialState: InitialState = {
   },
   city: "Belgorod" || localStorage.getItem("city"),
   searchValue: "",
-  loading: false
+  loading: false,
+  darkTheme: false,
 };
 
 export const WeatherInfoSlice = createSlice({
@@ -145,9 +147,13 @@ export const WeatherInfoSlice = createSlice({
 
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
+    },
+
+    setTheme: (state, action: PayloadAction<boolean>) => {
+      state.darkTheme = action.payload;
     }
   },
 });
 
-export const { setWeatherInfo, setCity, setSearchValue, setLoading } =
+export const { setWeatherInfo, setCity, setSearchValue, setLoading, setTheme } =
   WeatherInfoSlice.actions;

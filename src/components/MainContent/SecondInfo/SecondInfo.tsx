@@ -8,12 +8,15 @@ import WindImg from "../../../img/parameters/wind.svg";
 import { useAppSelector } from "../../../store/hooks";
 import Loader from "../../Loader/Loader";
 
-const Wrapper = styled.div`
+interface WrapperProps {
+  bg: string;
+}
+
+const Wrapper = styled.div<WrapperProps>`
   display: flex;
   align-items: center;
   position: relative;
-  background-color: #fff;
-  background-image: url(${CloudsImg});
+  background-image: ${(props) => props.bg};
   background-repeat: no-repeat;
   background-position: top right;
   max-width: 750px;
@@ -21,6 +24,11 @@ const Wrapper = styled.div`
   min-height: 300px;
   border-radius: 20px;
   box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
+  background-color: ${(props) => props.theme};
+
+  @media(max-width: 450px) {
+    min-height: auto;
+  }
 `;
 
 const Inner = styled.div`
@@ -29,20 +37,26 @@ const Inner = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 25px;
+  color: ${(props) => props.color};
+
+  @media(max-width: 450px) {
+    padding: 20px;
+  }
 `;
 
 function SecondInfo() {
   const weatherInfo = useAppSelector((state) => state.weatherInfo.weatherInfo);
   const loading = useAppSelector((state) => state.weatherInfo.loading);
+  const darkTheme = useAppSelector((state) => state.weatherInfo.darkTheme);
   const temp = Math.round(weatherInfo.main.temp - 273);
   const feels_like = Math.round(weatherInfo.main.feels_like - 273);
   const pressure = weatherInfo.main.pressure;
   const windSpeed = weatherInfo.wind.speed;
 
   return (
-    <Wrapper>
+    <Wrapper theme={darkTheme ? "000" : "fff"} bg={darkTheme ? "" : `url(${CloudsImg})`} >
       {loading && <Loader />}
-      <Inner>
+      <Inner color={darkTheme ? "#fff !important" : ""}>
         <Parameter
           img={TempImg}
           title="Температура"
