@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useAppSelector } from "../../store/hooks";
 
-const Wrapper = styled.div`
+interface WrapperProps {
+    bg: string;
+}
+
+const Wrapper = styled.div<WrapperProps>`
     position: absolute;
     display: flex;
     justify-content: center;
@@ -9,7 +14,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     padding: 20px;
-    background-color: #fff;
+    background-color: ${(props) => props.bg};
 `;
 
 const LoaderStyle = styled.div`
@@ -37,8 +42,10 @@ const LoaderStyle = styled.div`
 `;
 
 function Loader() {
+    const darkTheme = useAppSelector((state) => state.weatherInfo.darkTheme);
+
     return(
-        <Wrapper>
+        <Wrapper bg={darkTheme ? "#000" : "#fff"}>
             <LoaderStyle />
         </Wrapper>
     )
