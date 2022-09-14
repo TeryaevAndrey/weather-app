@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import SunnyImg from "../../../img/sunny.svg";
+import ColdImg from "../../../img/cold.svg";
+import CloudyImg from "../../../img/cloudy.svg";
 import { useAppSelector } from "../../../store/hooks";
 
 const Wrapper = styled.div`
@@ -77,6 +79,16 @@ function MainInfo() {
     minutes = "0" + minutes;
   }
 
+  let weatherIcon: string;
+
+  if(degrees < 0) {
+    weatherIcon = ColdImg;
+  } else if(degrees < 10) {
+    weatherIcon = CloudyImg;
+  } else {
+    weatherIcon = SunnyImg;
+  }
+
   return (
     <Wrapper>
       <WrapperMaininfo>
@@ -84,7 +96,7 @@ function MainInfo() {
           <Degrees>{degrees}°</Degrees>
           <CurrentDay>Сегодня</CurrentDay>
         </DegreesDayWrapper>
-        <WeatherImg src={SunnyImg} alt="weather" />
+        <WeatherImg src={weatherIcon} alt="weather" />
       </WrapperMaininfo>
       <Time>
         Время: {hours}:{minutes}

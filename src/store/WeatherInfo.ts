@@ -57,6 +57,7 @@ interface InitialState {
   weatherInfo: WeatherInfo;
   city: string;
   searchValue: string;
+  loading: boolean;
 }
 
 export const getWeatherInfo = createAsyncThunk(
@@ -121,6 +122,7 @@ const initialState: InitialState = {
   },
   city: "Belgorod" || localStorage.getItem("city"),
   searchValue: "",
+  loading: false;
 };
 
 export const WeatherInfoSlice = createSlice({
