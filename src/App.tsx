@@ -1,9 +1,9 @@
-import React from 'react';
-import { createGlobalStyle } from 'styled-components';
-import Header from './components/Header/Header';
-import MainContent from './components/MainContent/MainContent';
-import { useAppDispatch, useAppSelector } from './store/hooks';
-import { getWeatherInfo } from './store/WeatherInfo';
+import React from "react";
+import { createGlobalStyle } from "styled-components";
+import Header from "./components/Header/Header";
+import MainContent from "./components/MainContent/MainContent";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { getWeatherInfo } from "./store/WeatherInfo";
 
 function App() {
   const darkTheme = useAppSelector((state) => state.weatherInfo.darkTheme);

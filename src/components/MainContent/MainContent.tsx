@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import MainInfo from './MainInfo/MainInfo';
-import SecondInfo from './SecondInfo/SecondInfo';
+import MainInfo from "./MainInfo/MainInfo";
+import SecondInfo from "./SecondInfo/SecondInfo";
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,13 +14,13 @@ const CurrentWeather = styled.div`
   align-items: flex-start;
   gap: 30px;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     & {
       flex-wrap: wrap;
     }
   }
 
-  @media(max-width: 500px) {
+  @media (max-width: 500px) {
     & {
       justify-content: center;
     }

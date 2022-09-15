@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import { StringLiteral } from 'typescript';
+import { StringLiteral } from "typescript";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const Icon = styled.img`
 
 const Title = styled.p`
   font-size: 14px;
-  color: #939CB0;
+  color: #939cb0;
 `;
 
 const Result = styled.p`
@@ -29,7 +29,7 @@ interface ParameterProps {
   result: string;
 }
 
-function Parameter({img, title, result}: ParameterProps) {
+function Parameter({ img, title, result }: ParameterProps) {
   return (
     <Wrapper>
       <Icon src={img} alt="icon" />

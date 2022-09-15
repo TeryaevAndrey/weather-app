@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   border-radius: 20px;
   box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
 
-  @media(max-width: 450px) {
+  @media (max-width: 450px) {
     min-height: auto;
   }
 `;
@@ -44,7 +44,7 @@ const Degrees = styled.p`
   font-weight: 600;
   color: #4793ff;
 
-  @media(max-width: 450px) {
+  @media (max-width: 450px) {
     font-size: 65px;
   }
 `;
@@ -53,7 +53,7 @@ const CurrentDay = styled.p`
   font-size: 40px;
   margin-top: 5px;
 
-  @media(max-width: 450px) {
+  @media (max-width: 450px) {
     font-size: 30px;
   }
 `;
@@ -62,7 +62,7 @@ const WeatherImg = styled.img`
   width: 120px;
   height: 120px;
 
-  @media(max-width: 450px) {
+  @media (max-width: 450px) {
     width: 80px;
     height: 80px;
   }
@@ -73,7 +73,7 @@ const Time = styled.p`
   color: #939cb0;
   margin-top: auto;
 
-  @media(max-width: 450px) {
+  @media (max-width: 450px) {
     font-size: 20px;
   }
 `;
@@ -83,7 +83,7 @@ const City = styled.p`
   color: #939cb0;
   margin-top: 10px;
 
-  @media(max-width: 450px) {
+  @media (max-width: 450px) {
     font-size: 20px;
   }
 `;
@@ -114,11 +114,11 @@ function MainInfo() {
 
   let weatherIcon: string = SunnyImg;
 
-  if(temp > 0 && temp < 10) {
+  if (temp > 0 && temp < 10) {
     weatherIcon = CloudyImg;
-  } 
-  
-  if(temp < 0) {
+  }
+
+  if (temp < 0) {
     weatherIcon = ColdImg;
   }
 
@@ -126,17 +126,17 @@ function MainInfo() {
     <Wrapper color={darkTheme ? "#000" : "#fff"}>
       {loading && <Loader />}
       <Inner color={darkTheme ? "#fff !important" : ""}>
-      <WrapperMaininfo>
-        <DegreesDayWrapper>
-          <Degrees>{temp}°</Degrees>
-          <CurrentDay>Сегодня</CurrentDay>
-        </DegreesDayWrapper>
-        <WeatherImg src={weatherIcon} alt="weather" />
-      </WrapperMaininfo>
-      <Time>
-        Время: {hours}:{minutes}
-      </Time>
-      <City>Город: {city}</City>
+        <WrapperMaininfo>
+          <DegreesDayWrapper>
+            <Degrees>{temp}°</Degrees>
+            <CurrentDay>Сегодня</CurrentDay>
+          </DegreesDayWrapper>
+          <WeatherImg src={weatherIcon} alt="weather" />
+        </WrapperMaininfo>
+        <Time>
+          Время: {hours}:{minutes}
+        </Time>
+        <City>Город: {city}</City>
       </Inner>
     </Wrapper>
   );

@@ -1,15 +1,15 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent } from "react";
 import styled from "styled-components";
 import SearchImg from "../../../img/search.svg";
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { setCity, setSearchValue } from '../../../store/WeatherInfo';
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { setCity, setSearchValue } from "../../../store/WeatherInfo";
 
 const Form = styled.form`
   display: flex;
   align-items: center;
   gap: 5px;
 
-  @media(max-width: 720px) {
+  @media (max-width: 720px) {
     flex-direction: column;
     width: 100%;
     gap: 20px;
@@ -17,6 +17,7 @@ const Form = styled.form`
 `;
 
 const Wrapper = styled.div`
+  position: relative;
   padding: 10px 20px;
   width: 195px;
   min-height: 40px;
@@ -27,7 +28,7 @@ const Wrapper = styled.div`
   gap: 5px;
   box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
 
-  @media(max-width: 720px) {
+  @media (max-width: 720px) {
     width: 100%;
     margin-top: 20px;
   }
@@ -50,7 +51,7 @@ const SearchInput = styled.input`
 
 const Btn = styled.button`
   padding: 10px 20px;
-  background-color: #4793FF;
+  background-color: #4793ff;
   color: #fff;
   min-height: 40px;
   border-radius: 20px;
@@ -60,17 +61,26 @@ const Btn = styled.button`
   font-weight: 600;
   cursor: pointer;
 
-  @media(max-width: 720px) {
+  @media (max-width: 720px) {
     width: 100%;
     min-height: 45px;
     margin-left: 0;
   }
 `;
 
+const Error = styled.p`
+  position: absolute;
+  left: 20px;
+  top: -15px;
+  font-size: 10px;
+  color: red;
+`;
+
 function Search() {
   const dispatch = useAppDispatch();
   const searchValue = useAppSelector((state) => state.weatherInfo.searchValue);
   const darkTheme = useAppSelector((state) => state.weatherInfo.darkTheme);
+  const cityError = useAppSelector((state) => state.weatherInfo.cityError);
 
   const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchValue(event.target.value));
@@ -83,11 +93,16 @@ function Search() {
 
   return (
     <Form onSubmit={(event) => chooseCity(event)}>
-    <Wrapper theme={darkTheme ? "#fff" : "rgba(71, 147, 255, 0.2)"}>
-      <Img src={SearchImg} alt="search" />
-      <SearchInput onChange={(event) => handleChangeSearch(event)} value={searchValue} placeholder="Город" />
-    </Wrapper>
-    <Btn type="submit">Выбрать</Btn>
+      <Wrapper theme={darkTheme ? "#fff" : "rgba(71, 147, 255, 0.2)"}>
+        <Img src={SearchImg} alt="search" />
+        {cityError && <Error>Некорректный город</Error>}
+        <SearchInput
+          onChange={(event) => handleChangeSearch(event)}
+          value={searchValue}
+          placeholder="Город"
+        />
+      </Wrapper>
+      <Btn type="submit">Выбрать</Btn>
     </Form>
   );
 }

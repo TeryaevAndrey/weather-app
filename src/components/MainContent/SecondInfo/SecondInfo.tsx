@@ -26,7 +26,7 @@ const Wrapper = styled.div<WrapperProps>`
   box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
   background-color: ${(props) => props.theme};
 
-  @media(max-width: 450px) {
+  @media (max-width: 450px) {
     min-height: auto;
   }
 `;
@@ -39,7 +39,7 @@ const Inner = styled.div`
   gap: 25px;
   color: ${(props) => props.color};
 
-  @media(max-width: 450px) {
+  @media (max-width: 450px) {
     padding: 20px;
   }
 `;
@@ -54,7 +54,10 @@ function SecondInfo() {
   const windSpeed = weatherInfo.wind.speed;
 
   return (
-    <Wrapper theme={darkTheme ? "000" : "fff"} bg={darkTheme ? "" : `url(${CloudsImg})`} >
+    <Wrapper
+      theme={darkTheme ? "000" : "fff"}
+      bg={darkTheme ? "" : `url(${CloudsImg})`}
+    >
       {loading && <Loader />}
       <Inner color={darkTheme ? "#fff !important" : ""}>
         <Parameter

@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import LogoImg from "../../img/logo.png";
 import ThemeImg from "../../img/theme.svg";
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setTheme } from '../../store/WeatherInfo';
-import Search from './Search/Search';
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setTheme } from "../../store/WeatherInfo";
+import Search from "./Search/Search";
 
 const HeaderStyle = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const Theme = styled.img`
   margin-left: auto;
   margin-right: 15px;
 
-  @media(max-width: 390px) {
+  @media (max-width: 390px) {
     margin-top: 20px;
     margin: 0 auto;
   }
@@ -46,7 +46,11 @@ function Header() {
       <LogoLink href="#">
         <Logo src={LogoImg} alt="react-weather" />
       </LogoLink>
-      <Theme onClick={() => dispatch(setTheme(!darkTheme))} src={ThemeImg} alt="theme" />
+      <Theme
+        onClick={() => dispatch(setTheme(!darkTheme))}
+        src={ThemeImg}
+        alt="theme"
+      />
       <Search />
     </HeaderStyle>
   );

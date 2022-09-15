@@ -59,17 +59,24 @@ interface InitialState {
   searchValue: string;
   loading: boolean;
   darkTheme: boolean;
+  cityError: boolean;
 }
 
 export const getWeatherInfo = createAsyncThunk(
   "WeatherInfo/getWeatherInfo",
   async (city: string, { dispatch }) => {
-    dispatch(setLoading(true));
-    const res = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
-    );
-    dispatch(setLoading(false));
-    dispatch(setWeatherInfo(res.data));
+    try {
+      dispatch(setLoading(true));
+      const res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
+      );
+
+      dispatch(setLoading(false));
+      dispatch(setWeatherInfo(res.data));
+      dispatch(setCityError(false));
+    } catch (err) {
+      dispatch(setCityError(true));
+    }
   }
 );
 
@@ -85,7 +92,7 @@ const initialState: InitialState = {
         main: "",
         description: "",
         icon: "",
-      }
+      },
     ],
     base: "",
     main: {
@@ -127,6 +134,7 @@ const initialState: InitialState = {
   searchValue: "",
   loading: false,
   darkTheme: false,
+  cityError: false,
 };
 
 export const WeatherInfoSlice = createSlice({
@@ -151,9 +159,19 @@ export const WeatherInfoSlice = createSlice({
 
     setTheme: (state, action: PayloadAction<boolean>) => {
       state.darkTheme = action.payload;
-    }
+    },
+
+    setCityError: (state, action: PayloadAction<boolean>) => {
+      state.cityError = action.payload;
+    },
   },
 });
 
-export const { setWeatherInfo, setCity, setSearchValue, setLoading, setTheme } =
-  WeatherInfoSlice.actions;
+export const {
+  setWeatherInfo,
+  setCity,
+  setSearchValue,
+  setLoading,
+  setTheme,
+  setCityError,
+} = WeatherInfoSlice.actions;
