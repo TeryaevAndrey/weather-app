@@ -133,7 +133,7 @@ const initialState: InitialState = {
   city: "Belgorod" || localStorage.getItem("city"),
   searchValue: "",
   loading: false,
-  darkTheme: false,
+  darkTheme: false || localStorage.getItem("darkTheme") === "true",
   cityError: false,
 };
 

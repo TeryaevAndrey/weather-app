@@ -41,13 +41,18 @@ function Header() {
   const dispatch = useAppDispatch();
   const darkTheme = useAppSelector((state) => state.weatherInfo.darkTheme);
 
+  const toggleTheme = () => {
+    dispatch(setTheme(!darkTheme));
+    localStorage.setItem("darkTheme", JSON.stringify(!darkTheme));
+  };
+
   return (
     <HeaderStyle>
       <LogoLink href="#">
         <Logo src={LogoImg} alt="react-weather" />
       </LogoLink>
       <Theme
-        onClick={() => dispatch(setTheme(!darkTheme))}
+        onClick={toggleTheme}
         src={ThemeImg}
         alt="theme"
       />
