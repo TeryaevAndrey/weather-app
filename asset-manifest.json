@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/weather-react/static/js/main.a5c98fbb.js",
+    "static/media/cloudsBg.png": "/weather-react/static/media/cloudsBg.6ac866ac9653bdf6bc92.png",
+    "static/media/temp.svg": "/weather-react/static/media/temp.acac2a4630bbfb6ad283da9fadccf2a0.svg",
+    "static/media/wind.svg": "/weather-react/static/media/wind.3298f890711a8217e867ded1bc137a87.svg",
+    "static/media/pressure.svg": "/weather-react/static/media/pressure.0bf7b9446b2b035a66b3705d2bb6285c.svg",
+    "static/media/cold.svg": "/weather-react/static/media/cold.9f399b54e07b2cd9ad7892027ac310f8.svg",
+    "static/media/cloudy.svg": "/weather-react/static/media/cloudy.34e88a8bb5c87f43bc8b038c81ca1830.svg",
+    "static/media/sunny.svg": "/weather-react/static/media/sunny.c39d9d48d5fa89d784ed17c63258a437.svg",
+    "static/media/search.svg": "/weather-react/static/media/search.f7a26ab2c1e6ae877b07de2d73c3ff06.svg",
+    "index.html": "/weather-react/index.html",
+    "static/media/theme.svg": "/weather-react/static/media/theme.13c916d4840b212b2bbdcfb6fab834cd.svg",
+    "main.a5c98fbb.js.map": "/weather-react/static/js/main.a5c98fbb.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.a5c98fbb.js"
+  ]
+}
