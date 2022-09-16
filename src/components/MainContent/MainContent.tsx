@@ -13,6 +13,7 @@ const CurrentWeather = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   gap: 30px;
+  padding: 20px 0;
 
   @media (max-width: 800px) {
     & {
