@@ -5,9 +5,8 @@ import { MdClose } from "react-icons/md";
 
 const Wrapper = styled.form`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
   padding: 10px;
   border-radius: 15px;
