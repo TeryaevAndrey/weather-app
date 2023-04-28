@@ -1,49 +1,65 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
-import Header from "./components/Header/Header";
-import MainContent from "./components/MainContent/MainContent";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { getWeatherInfo } from "./store/WeatherInfo";
+import "./index.css";
+import styled, { createGlobalStyle } from "styled-components";
+import Search from "./components/components/Search";
 
-function App() {
-  const darkTheme = useAppSelector((state) => state.weatherInfo.darkTheme);
+// `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
 
-  const GlobalStyle = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    color: #0f172a;
   }
 
   body {
-    font-family: "Raleway";
     font-size: 14px;
     font-weight: 400;
     line-height: 1;
-    color: #000;
-    background-color: ${darkTheme ? "#000" : "fff"};
+    background-color: #FBFBFB;
+    overflow-x: hidden;
   }
 
-  .App {
-    max-width: 1240px;
-    padding: 0 20px;
-    margin: 0 auto;
+  input,
+  button {
+    outline: none;
+    border: none;
+  }
+
+  button {
+    cursor: pointer;
   }
 `;
 
-  const city = useAppSelector((state) => state.weatherInfo.city);
-  const dispatch = useAppDispatch();
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-  React.useEffect(() => {
-    dispatch(getWeatherInfo(city));
-  }, [dispatch, city]);
+const Block = styled.div`
+  border-radius: 30px;
+  background-color: #fff;
+  max-width: 400px;
+  min-height: 400px;
+  width: 100%;
+  padding: 30px;
+  margin: 0 auto;
+`;
 
+const App = () => {
   return (
-    <div className="App">
-      <Header />
-      <MainContent />
-      <GlobalStyle />
-    </div>
+    <>
+      <GlobalStyles />
+      <Wrapper>
+        <Block>
+          <Search />
+        </Block>
+      </Wrapper>
+    </>
   );
 }
 
