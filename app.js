@@ -5,6 +5,7 @@ const searchInput = document.querySelector("#searchValue");
 const locationTitle = document.querySelector("#locationTitle");
 const weatherInner = document.querySelector(".weather__inner");
 const weatherContent = document.querySelector(".weather__content");
+const weatherImg = document.querySelector(".weather__img");
 const notFound = document.querySelector(".not-found");
 const loader = document.querySelector(".loader");
 
@@ -38,6 +39,8 @@ const getWeatherInfo = async (city) => {
   loader.style.display = "flex";
 
   try {
+    let isDay;
+
     parameters.innerHTML = ``;
 
     const res = await fetch(
@@ -45,6 +48,63 @@ const getWeatherInfo = async (city) => {
     );
 
     const data = await res.json();
+    const date = new Date(data.dt * 1000);
+    const toUtc = date.getTime() + date.getTimezoneOffset() * 60000;
+    const currentLocaleTime = toUtc + 1000 * data.timezone;
+    const selectedDate = new Date(currentLocaleTime);
+    const hours = selectedDate.getHours();
+
+    if (hours < 20 && hours > 6) {
+      isDay = true;
+    } else {
+      isDay = false;
+    }
+
+    const weatherDescription = data.weather[0].description;
+
+    if (isDay === true) {
+      switch (weatherDescription) {
+        case "clear sky":
+        case "few clouds":
+        case "scattered clouds":
+        case "broken clouds":
+          weatherImg.src = "./img/weather/day/cloudy.svg";
+          break;
+        case "shower rain":
+        case "rain":
+          weatherImg.src = "./img/weather/day/rain.svg";
+          break;
+        case "thunderstorm":
+          weatherImg.src = "./img/weather/day/shtorm.svg";
+          break;
+        case "snow":
+          weatherImg.src = "./img/weather/day/snow.svg";
+          break;
+        case "mist":
+          weatherImg.src = "./img/weather/mist.svg";
+          break;
+      }
+    } else {
+      switch (weatherDescription) {
+        case "clear sky":
+        case "few clouds":
+        case "scattered clouds":
+        case "broken clouds":
+          weatherImg.src = "./img/weather/night/cloudy.svg";
+          break;
+        case "shower rain":
+        case "rain":
+        case "thunderstorm":
+          weatherImg.src = "./img/weather/night/rain.svg";
+          break;
+        case "snow":
+          weatherImg.src = "./img/weather/night/snow.svg";
+          break;
+        case "mist":
+          weatherImg.src = "./img/weather/mist.svg";
+          break;
+      }
+    }
 
     locationTitle.textContent = data.name;
 
