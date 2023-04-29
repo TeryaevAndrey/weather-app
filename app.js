@@ -1,7 +1,7 @@
 const parameters = document.querySelector(".parameters");
 const temp = document.querySelector("#temp");
 const searchForm = document.querySelector("#searchForm");
-const searchValue = document.querySelector("#searchValue");
+const searchInput = document.querySelector("#searchValue");
 const locationTitle = document.querySelector("#locationTitle");
 const weatherInner = document.querySelector(".weather__inner");
 const weatherContent = document.querySelector(".weather__content");
@@ -13,7 +13,10 @@ const key = "c4206edf19f35fc184f01a77bb9de40d";
 searchForm.onsubmit = (e) => {
   e.preventDefault();
 
-  getWeatherInfo(searchValue.value);
+  getWeatherInfo(searchInput.value);
+  localStorage.setItem("city", JSON.stringify(searchInput.value));
+
+  searchInput.value = "";
 };
 
 const parameterTemplate = (iconPath, title, value) => {
@@ -63,10 +66,14 @@ const getWeatherInfo = async (city) => {
     notFound.style.display = "none";
   } catch (err) {
     locationTitle.textContent = "Город не найден";
+    localStorage.removeItem("city");
 
     weatherContent.style.display = "none";
     notFound.style.display = "flex";
   }
+
+  weatherInner.style.display = "block";
+  loader.style.display = "none";
 };
 
-getWeatherInfo("Moscow");
+getWeatherInfo(JSON.parse(localStorage.getItem("city")) || "Moscow");
