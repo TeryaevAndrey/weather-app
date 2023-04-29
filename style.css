@@ -1,6 +1,6 @@
 :root {
   --color-main: #06283d;
-  --color-blue: #89C6FF;
+  --color-blue: #89c6ff;
 }
 
 * {
@@ -23,18 +23,96 @@ body {
   min-height: 100vh;
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+  display: none;
+}
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: var(--color-blue);
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
+
 .wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  gap: 30px;
+}
+
+.search__form {
+  width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 15px;
+  min-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.search__form-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+.search__form-btn {
+  padding: 10px 20px;
+  background-color: var(--color-blue);
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
 }
 
 .weather {
   background-color: #fff;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
-  min-height: 400px;
   width: 400px;
 }
 
@@ -44,31 +122,22 @@ body {
 
 .weather__header {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
 }
 
 .location {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 10px;
+  margin: 0 auto;
 }
 
 .location__title {
   font-size: 20px;
   font-weight: 600;
   text-transform: uppercase;
-}
-
-.search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: var(--color-blue);
-  cursor: pointer;
 }
 
 .weather__content {
@@ -79,6 +148,7 @@ body {
 .weather__img {
   display: flex;
   margin: 0 auto;
+  margin-top: 10px;
 }
 
 .weather__degrees {
@@ -97,6 +167,10 @@ body {
   right: -20px;
 }
 
+.not-found {
+  display: none;
+}
+
 .parameters {
   display: flex;
   justify-content: space-between;
@@ -107,7 +181,7 @@ body {
 .parameter {
   display: flex;
   align-items: flex-start;
-  gap: 5px; 
+  gap: 10px;
 }
 
 .parameter__info {
@@ -119,4 +193,11 @@ body {
 .parameter__info-value {
   font-size: 14px;
   opacity: 0.9;
+}
+
+@media (max-width: 400px) {
+  .search__form,
+  .weather {
+    max-width: 90%;
+  }
 }

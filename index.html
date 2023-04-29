@@ -9,45 +9,31 @@
   </head>
   <body>
     <div class="wrapper">
+      <form class="search__form" id="searchForm">
+        <img src="./img/search.svg" alt="search" width="20" height="20" />
+        <input class="search__form-input" type="text" placeholder="Введите название города..." id="searchValue">
+        <button type="submit" class="search__form-btn">Поиск</button>
+      </form>
       <div class="weather">
         <div class="weather__inner">
           <div class="weather__header">
             <div class="location">
               <img class="location__icon" src="./img/location.svg" alt="location" width="20" height="20">
-              <p class="location__title">Москва</з>
-            </div>
-            <div class="search">
-              <img class="search__icon" src="./img/search.svg" alt="search" width="22" height="22">
+              <p class="location__title" id="locationTitle"></з>
             </div>
           </div>
           <div class="weather__content">
             <img class="weather__img" src="./img/weather/cloudy.svg" alt="cloudy" width="150" height="150">
-            <p class="weather__degrees">10</p>
-
-            <div class="parameters">
-              <div class="parameter">
-                <img class="weather__parameter-icon" src="./img/location.svg" alt="location" width="20" height="20">
-                <div class="parameter__info">
-                  <p class="parameter-info-title">Скорость ветра</p>
-                  <p class="parameter__info-value">10 мм</p>
-                </div>
-              </div>
-              <div class="parameter">
-                <img class="weather__parameter-icon" src="./img/location.svg" alt="location" width="20" height="20">
-                <div class="parameter__info">
-                  <p class="parameter-info-title">Скорость ветра</p>
-                  <p class="parameter__info-value">10 мм</p>
-                </div>
-              </div>
-              <div class="parameter">
-                <img class="weather__parameter-icon" src="./img/location.svg" alt="location" width="20" height="20">
-                <div class="parameter__info">
-                  <p class="parameter-info-title">Скорость ветра</p>
-                  <p class="parameter__info-value">10 мм</p>
-                </div>
-              </div>
-            </div>
+            <p class="weather__degrees" id="temp"></p>
+            <div class="parameters"></div>
           </div>
+
+          <div class="not-found">
+            <img class="weather__img" src="./img/notFound.svg" alt="cloudy" width="150" height="150">
+          </div>
+        </div>
+        <div class="loader">
+          <div class="lds-facebook"><div></div><div></div><div></div></div>
         </div>
       </div>
     </div>
