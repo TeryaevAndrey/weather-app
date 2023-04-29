@@ -8,6 +8,7 @@ const weatherContent = document.querySelector(".weather__content");
 const weatherImg = document.querySelector(".weather__img");
 const notFound = document.querySelector(".not-found");
 const loader = document.querySelector(".loader");
+const time = document.querySelector("#time");
 
 const key = "c4206edf19f35fc184f01a77bb9de40d";
 
@@ -53,6 +54,8 @@ const getWeatherInfo = async (city) => {
     const currentLocaleTime = toUtc + 1000 * data.timezone;
     const selectedDate = new Date(currentLocaleTime);
     const hours = selectedDate.getHours();
+
+    time.textContent = selectedDate.toLocaleTimeString().slice(0, 5);
 
     if (hours < 20 && hours > 6) {
       isDay = true;

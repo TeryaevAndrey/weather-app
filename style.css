@@ -15,9 +15,11 @@ body {
   font-weight: 400;
   line-height: 1;
   color: var(--color-main);
-  background: linear-gradient(112.64deg,
-      rgba(0, 163, 255, 0.73) 0%,
-      rgba(75, 178, 235, 0.4) 99.63%);
+  background: linear-gradient(
+    112.64deg,
+    rgba(0, 163, 255, 0.73) 0%,
+    rgba(75, 178, 235, 0.4) 99.63%
+  );
   min-height: 100vh;
 }
 
@@ -164,6 +166,12 @@ body {
   margin: 0 auto;
 }
 
+.weather__time {
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
 .weather__degrees::after {
   content: "°";
   position: absolute;
@@ -201,7 +209,6 @@ body {
 }
 
 @media (max-width: 400px) {
-
   .search__form,
   .weather {
     max-width: 90%;
