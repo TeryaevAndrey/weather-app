@@ -38,10 +38,10 @@ const parameterTemplate = (iconPath, title, value) => {
 const getWeatherInfo = async (city) => {
   weatherInner.style.display = "none";
   loader.style.display = "flex";
+  weatherContent.style.display = "flex";
+  notFound.style.display = "none";
 
   try {
-    let isDay;
-
     parameters.innerHTML = ``;
 
     const res = await fetch(
@@ -57,56 +57,62 @@ const getWeatherInfo = async (city) => {
 
     time.textContent = selectedDate.toLocaleTimeString().slice(0, 5);
 
+    const weatherMain = await data.weather[0].main;
+
     if (hours < 20 && hours > 6) {
-      isDay = true;
-    } else {
-      isDay = false;
-    }
-
-    const weatherDescription = data.weather[0].description;
-
-    if (isDay === true) {
-      switch (weatherDescription) {
-        case "clear sky":
-        case "few clouds":
-        case "scattered clouds":
-        case "broken clouds":
-          weatherImg.src = "./img/weather/day/cloudy.svg";
-          break;
-        case "shower rain":
-        case "rain":
-          weatherImg.src = "./img/weather/day/rain.svg";
-          break;
-        case "thunderstorm":
+      switch (weatherMain) {
+        case "Thunderstorm":
           weatherImg.src = "./img/weather/day/shtorm.svg";
           break;
-        case "snow":
+        case "Drizzle":
+        case "Rain":
+          weatherImg.src = "./img/weather/day/rain.svg";
+          break;
+        case "Snow":
           weatherImg.src = "./img/weather/day/snow.svg";
           break;
-        case "mist":
-          weatherImg.src = "./img/weather/mist.svg";
+        case "Clear":
+        case "Clouds":
+          weatherImg.src = "./img/weather/day/cloudy.svg";
+          break;
+        default:
+          weatherImg.src = "./img/weather/day/cloudy.svg";
           break;
       }
     } else {
-      switch (weatherDescription) {
-        case "clear sky":
-        case "few clouds":
-        case "scattered clouds":
-        case "broken clouds":
-          weatherImg.src = "./img/weather/night/cloudy.svg";
+      switch (weatherMain) {
+        case "Thunderstorm":
+          weatherImg.src = "./img/weather/night/shtorm.svg";
           break;
-        case "shower rain":
-        case "rain":
-        case "thunderstorm":
+        case "Drizzle":
+        case "Rain":
           weatherImg.src = "./img/weather/night/rain.svg";
           break;
-        case "snow":
+        case "Snow":
           weatherImg.src = "./img/weather/night/snow.svg";
           break;
-        case "mist":
-          weatherImg.src = "./img/weather/mist.svg";
+        case "Clear":
+        case "Clouds":
+          weatherImg.src = "./img/weather/night/cloudy.svg";
+          break;
+        default:
+          weatherImg.src = "./img/weather/night/cloudy.svg";
           break;
       }
+    }
+
+    switch (weatherMain) {
+      case "Mist":
+      case "Smoke":
+      case "Haze":
+      case "Dust":
+      case "Fog":
+      case "Sand":
+      case "Dust":
+      case "Ash":
+      case "Squall":
+      case "Tornado":
+        weatherImg.src = "./img/weather/mist.svg";
     }
 
     locationTitle.textContent = data.name;
